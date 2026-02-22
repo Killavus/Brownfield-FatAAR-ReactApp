@@ -1,3 +1,6 @@
+import groovy.json.JsonOutput
+import groovy.json.JsonSlurper
+
 plugins {
     id("com.android.library")
     id("org.jetbrains.kotlin.android")
@@ -60,4 +63,23 @@ dependencies {
 
 react {
     autolinkLibrariesWithApp()
+}
+
+val moduleBuildDir: Directory = layout.buildDirectory.get()
+
+/**
+ * As a result of `from(components.getByName("default"))` all of the project
+ * dependencies are added to `module.json` file. We do not need the react-native
+ * third party dependencies to be a part of it as we embed those dependencies.
+ */
+tasks.register("removeDependenciesFromModuleFile") {
+    doLast {
+        file("$moduleBuildDir/publications/mavenAar/module.json").run {
+            val json = inputStream().use { JsonSlurper().parse(it) as Map<String, Any> }
+            (json["variants"] as? List<MutableMap<String, Any>>)?.forEach { variant ->
+                (variant["dependencies"] as? MutableList<Map<String, Any>>)?.removeAll { it["group"] == rootProject.name }
+            }
+            writer().use { it.write(JsonOutput.prettyPrint(JsonOutput.toJson(json))) }
+        }
+    }
 }
