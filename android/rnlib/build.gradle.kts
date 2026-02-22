@@ -9,6 +9,39 @@ plugins {
     id("com.facebook.react")
 }
 
+publishing {
+    publications {
+        create<MavenPublication>("mavenAar") {
+            groupId = "com.killavus"
+            artifactId = "rnlib"
+            version = "0.0.1-SNAPSHOT"
+            afterEvaluate {
+                from(components.getByName("default"))
+            }
+
+            pom {
+                withXml {
+                    /**
+                     * As a result of `from(components.getByName("default"))` all of the project
+                     * dependencies are added to `pom.xml` file. We do not need the react-native
+                     * third party dependencies to be a part of it as we embed those dependencies.
+                     */
+                    val dependenciesNode =
+                        (asNode().get("dependencies") as groovy.util.NodeList).first() as groovy.util.Node
+                    dependenciesNode.children()
+                        .filterIsInstance<groovy.util.Node>()
+                        .filter { (it.get("groupId") as groovy.util.NodeList).text() == rootProject.name }
+                        .forEach { dependenciesNode.remove(it) }
+                }
+            }
+        }
+    }
+
+    repositories {
+        mavenLocal() // Publishes to the local Maven repository (~/.m2/repository by default)
+    }
+}
+
 android {
     namespace = "com.killavus.rnlib"
     compileSdk = 36
@@ -42,11 +75,17 @@ android {
         }
     }
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_11
-        targetCompatibility = JavaVersion.VERSION_11
+        sourceCompatibility = JavaVersion.VERSION_17
+        targetCompatibility = JavaVersion.VERSION_17
     }
     kotlinOptions {
-        jvmTarget = "11"
+        jvmTarget = "17"
+    }
+
+    publishing {
+        multipleVariants {
+            allVariants()
+        }
     }
 }
 
@@ -82,4 +121,8 @@ tasks.register("removeDependenciesFromModuleFile") {
             writer().use { it.write(JsonOutput.prettyPrint(JsonOutput.toJson(json))) }
         }
     }
+}
+
+tasks.named("generateMetadataFileForMavenAarPublication") {
+    finalizedBy("removeDependenciesFromModuleFile")
 }
