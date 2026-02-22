@@ -1,6 +1,9 @@
 plugins {
     id("com.android.library")
     id("org.jetbrains.kotlin.android")
+    id("com.callstack.react.brownfield")
+    `maven-publish`
+    id("com.facebook.react")
 }
 
 android {
@@ -9,6 +12,18 @@ android {
 
     defaultConfig {
         minSdk = 24
+
+        buildConfigField(
+            "boolean",
+            "IS_EDGE_TO_EDGE_ENABLED",
+            properties["edgeToEdgeEnabled"].toString()
+        )
+        buildConfigField(
+            "boolean",
+            "IS_NEW_ARCHITECTURE_ENABLED",
+            properties["newArchEnabled"].toString()
+        )
+        buildConfigField("boolean", "IS_HERMES_ENABLED", properties["hermesEnabled"].toString())
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles("consumer-rules.pro")
@@ -39,4 +54,10 @@ dependencies {
     testImplementation("junit:junit:4.13.2")
     androidTestImplementation("androidx.test.ext:junit:1.3.0")
     androidTestImplementation("androidx.test.espresso:espresso-core:3.7.0")
+    api("com.facebook.react:react-android:0.84.0")
+    api("com.facebook.react:hermes-android:0.84.0")
+}
+
+react {
+    autolinkLibrariesWithApp()
 }
