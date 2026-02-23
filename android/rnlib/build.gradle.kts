@@ -97,7 +97,7 @@ dependencies {
     androidTestImplementation("androidx.test.ext:junit:1.3.0")
     androidTestImplementation("androidx.test.espresso:espresso-core:3.7.0")
     api("com.facebook.react:react-android:0.84.0")
-    api("com.facebook.react:hermes-android:0.84.0")
+    api("com.facebook.react:hermes-android:0.14.0")
 }
 
 react {
