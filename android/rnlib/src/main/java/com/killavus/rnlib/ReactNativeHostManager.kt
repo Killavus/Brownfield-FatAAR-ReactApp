@@ -1,6 +1,7 @@
 package com.killavus.rnlib
 
 import android.app.Application
+import android.util.Log
 import com.callstack.reactnativebrownfield.OnJSBundleLoaded
 import com.callstack.reactnativebrownfield.ReactNativeBrownfield
 import com.facebook.react.PackageList
@@ -12,5 +13,9 @@ object ReactNativeHostManager {
 
         val packageList = PackageList(application).packages
         ReactNativeBrownfield.initialize(application, packageList, onJSBundleLoaded)
+
+        if (BuildConfig.DEBUG) {
+            Log.d("ReactNativeHostManager", "Initializing React Native in debug mode")
+        }
     }
 }
