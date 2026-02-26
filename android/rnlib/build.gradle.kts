@@ -14,7 +14,7 @@ publishing {
         create<MavenPublication>("mavenAar") {
             groupId = "com.killavus"
             artifactId = "rnlib"
-            version = "0.0.4"
+            version = "0.0.18"
             afterEvaluate {
                 from(components.getByName("default"))
             }
