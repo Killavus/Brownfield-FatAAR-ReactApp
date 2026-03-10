@@ -1,0 +1,34 @@
+diff --git a/node_modules/react-native-nitro-modules/NitroModules.podspec b/node_modules/react-native-nitro-modules/NitroModules.podspec
+index e047eb3..f66eb68 100644
+--- a/node_modules/react-native-nitro-modules/NitroModules.podspec
++++ b/node_modules/react-native-nitro-modules/NitroModules.podspec
+@@ -31,25 +31,7 @@ Pod::Spec.new do |s|
+     "ios/**/*.swift",
+   ]
+   s.public_header_files = [
+-    # Public C++ headers will be exposed in modulemap (for Swift)
+-    "cpp/core/AnyMap.hpp",
+-    "cpp/core/ArrayBuffer.hpp",
+-    "cpp/core/HybridObject.hpp",
+-    "cpp/core/Null.hpp",
+-    "cpp/core/Promise.hpp",
+-    "cpp/entrypoint/HybridNitroModulesProxy.hpp",
+-    "cpp/entrypoint/InstallNitro.hpp",
+-    "cpp/registry/HybridObjectRegistry.hpp",
+-    "cpp/jsi/JSIConverter.hpp",
+-    "cpp/jsi/JSIHelpers.hpp",
+-    "cpp/platform/NitroLogger.hpp",
+-    "cpp/threading/Dispatcher.hpp",
+-    "cpp/utils/JSCallback.hpp",
+-    "cpp/utils/FastVectorCopy.hpp",
+-    "cpp/utils/NitroHash.hpp",
+-    "cpp/utils/NitroDefines.hpp",
+-    "cpp/utils/PropNameIDCache.hpp",
+-    "cpp/views/CachedProp.hpp",
++    "cpp/**/*.{h,hpp}",
+     # Public iOS-specific headers that will be exposed in modulemap (for Swift)
+     "ios/core/ArrayBufferHolder.hpp",
+     "ios/core/PromiseHolder.hpp",
+diff --git a/node_modules/react-native-nitro-modules/NitroModules.podspec.orig b/node_modules/react-native-nitro-modules/NitroModules.podspec.orig
+new file mode 100644
+index 0000000..e047eb3
