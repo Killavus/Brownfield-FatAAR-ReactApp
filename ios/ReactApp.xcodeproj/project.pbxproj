@@ -12,6 +12,7 @@
 		1D5ACD932F5F120C0063DF36 /* RNLib.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 1D5ACD8A2F5F120C0063DF36 /* RNLib.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		1D5ACD9B2F5F121C0063DF36 /* RNLib.docc in Sources */ = {isa = PBXBuildFile; fileRef = 1D5ACD982F5F121C0063DF36 /* RNLib.docc */; };
 		1D5ACD9C2F5F121C0063DF36 /* RNLib.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D5ACD992F5F121C0063DF36 /* RNLib.swift */; };
+		1D6E13222F60E3C2003D96CC /* EventPipeProxy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D6E13212F60E3C2003D96CC /* EventPipeProxy.swift */; };
 		553EA5216677963674D7B13D /* Pods_ReactApp_RNLib.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FD90425F0D05C280DB2247C1 /* Pods_ReactApp_RNLib.framework */; };
 		761780ED2CA45674006654EE /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 761780EC2CA45674006654EE /* AppDelegate.swift */; };
 		81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */; };
@@ -52,6 +53,7 @@
 		1D5ACD8A2F5F120C0063DF36 /* RNLib.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = RNLib.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		1D5ACD982F5F121C0063DF36 /* RNLib.docc */ = {isa = PBXFileReference; lastKnownFileType = folder.documentationcatalog; path = RNLib.docc; sourceTree = "<group>"; };
 		1D5ACD992F5F121C0063DF36 /* RNLib.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RNLib.swift; sourceTree = "<group>"; };
+		1D6E13212F60E3C2003D96CC /* EventPipeProxy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventPipeProxy.swift; sourceTree = "<group>"; };
 		3B4392A12AC88292D35C810B /* Pods-ReactApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ReactApp.debug.xcconfig"; path = "Target Support Files/Pods-ReactApp/Pods-ReactApp.debug.xcconfig"; sourceTree = "<group>"; };
 		3D37E5B593338A2A9C536F4B /* Pods_ReactApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ReactApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		4F28BED3104688148C7B7C67 /* Pods-ReactApp-RNLib.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ReactApp-RNLib.release.xcconfig"; path = "Target Support Files/Pods-ReactApp-RNLib/Pods-ReactApp-RNLib.release.xcconfig"; sourceTree = "<group>"; };
@@ -100,6 +102,7 @@
 			children = (
 				1D5ACD982F5F121C0063DF36 /* RNLib.docc */,
 				1D5ACD992F5F121C0063DF36 /* RNLib.swift */,
+				1D6E13212F60E3C2003D96CC /* EventPipeProxy.swift */,
 			);
 			path = RNLib;
 			sourceTree = "<group>";
@@ -417,6 +420,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				1D5ACD9B2F5F121C0063DF36 /* RNLib.docc in Sources */,
+				1D6E13222F60E3C2003D96CC /* EventPipeProxy.swift in Sources */,
 				1D5ACD9C2F5F121C0063DF36 /* RNLib.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -526,6 +530,7 @@
 				MODULE_VERIFIER_SUPPORTED_LANGUAGE_STANDARDS = "gnu17 gnu++20";
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
+				OTHER_SWIFT_FLAGS = "$(inherited) -cxx-interoperability-mode=default";
 				PRODUCT_BUNDLE_IDENTIFIER = com.killavus.RNLib;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = NO;
@@ -535,6 +540,7 @@
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_INSTALL_MODULE = YES;
 				SWIFT_INSTALL_OBJC_HEADER = NO;
+				SWIFT_OBJC_INTEROP_MODE = objcxx;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
 				SWIFT_VERSION = 5.0;
@@ -580,6 +586,7 @@
 				MODULE_VERIFIER_SUPPORTED_LANGUAGES = "objective-c objective-c++";
 				MODULE_VERIFIER_SUPPORTED_LANGUAGE_STANDARDS = "gnu17 gnu++20";
 				MTL_FAST_MATH = YES;
+				OTHER_SWIFT_FLAGS = "$(inherited) -cxx-interoperability-mode=default";
 				PRODUCT_BUNDLE_IDENTIFIER = com.killavus.RNLib;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = NO;
@@ -589,6 +596,7 @@
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_INSTALL_MODULE = YES;
 				SWIFT_INSTALL_OBJC_HEADER = NO;
+				SWIFT_OBJC_INTEROP_MODE = objcxx;
 				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
