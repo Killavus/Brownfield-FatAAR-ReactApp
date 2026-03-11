@@ -2,15 +2,15 @@ import { useEffect, useState } from 'react';
 import { Text, View, StyleSheet, Button, Pressable } from 'react-native';
 import NativePipe from 'react-native-nitro-event-pipe';
 import type { Accommodation } from 'react-native-nitro-event-pipe';
-import Animated, { useSharedValue } from 'react-native-reanimated';
+import Animated, { useSharedValue, withSpring } from 'react-native-reanimated';
 
 export default function App() {
   const [accommodations, setAccommodations] = useState<Accommodation[] | null>(
-    null
+    null,
   );
 
   useEffect(() => {
-    NativePipe.onAccommodationMapChange((accomodationMap) => {
+    NativePipe.onAccommodationMapChange(accomodationMap => {
       console.log('accomodation map change...');
       setAccommodations(accomodationMap.results);
     });
@@ -28,7 +28,7 @@ export default function App() {
         onPress={() => NativePipe.requestAccommodationMap()}
       />
 
-      {accommodations?.map((accommodation) => (
+      {accommodations?.map(accommodation => (
         <Pressable
           style={{ padding: 12 }}
           key={accommodation.hotelId}
@@ -41,9 +41,9 @@ export default function App() {
       <Button title="Refresh" onPress={() => NativePipe.refresh()} />
 
       <View>
-	<Text>Animation test!</Text>
-	<Animated.View style={[styles.square, { width }]} />
-	<Button title="Press me" onPress={handlePress} />
+        <Text>Animation test!</Text>
+        <Animated.View style={[styles.square, { width }]} />
+        <Button title="Press me" onPress={handlePress} />
       </View>
     </View>
   );
@@ -57,8 +57,8 @@ const styles = StyleSheet.create({
   },
   square: {
     width: 20,
-    height: 20,
-    backgroundColor: 'red'
+    height: 100,
+    borderRadius: 8,
+    backgroundColor: 'red',
   },
 });
-
