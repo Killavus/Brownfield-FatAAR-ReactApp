@@ -33,12 +33,9 @@ target 'ReactApp' do
       # :ccache_enabled => true
     )
 
-    # Fix C++ module building for Nitro pods:
-    # 1. NitroModules module map needs `requires cplusplus` so its umbrella
-    #    header (which includes C++ stdlib headers like <functional>) can be
-    #    processed by Clang in C++ mode.
-    # 2. NitroEventPipe needs C++ interop mode and C++20 build settings
-    #    (the nitrogen autolinking.rb settings aren't being applied).
+    # NitroModules module map needs `requires cplusplus` so its umbrella
+    # header (which includes C++ stdlib headers like <functional>) can be
+    # processed by Clang in C++ mode.
     installer.pods_project.targets.each do |target|
       if target.name == 'NitroModules'
         support_dir = "#{installer.sandbox.root}/Target Support Files/#{target.name}"
@@ -49,15 +46,6 @@ target 'ReactApp' do
             content.sub!('umbrella header', "requires cplusplus\n  umbrella header")
             File.write(modulemap_path, content)
           end
-        end
-      end
-
-      if target.name == 'NitroEventPipe'
-        target.build_configurations.each do |config|
-          config.build_settings['CLANG_CXX_LANGUAGE_STANDARD'] = 'c++20'
-          config.build_settings['SWIFT_OBJC_INTEROP_MODE'] = 'objcxx'
-          config.build_settings['OTHER_SWIFT_FLAGS'] ||= '$(inherited)'
-          config.build_settings['OTHER_SWIFT_FLAGS'] += ' -cxx-interoperability-mode=default'
         end
       end
     end
