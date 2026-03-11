@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { Text, View, StyleSheet, Button, Pressable } from 'react-native';
 import NativePipe from 'react-native-nitro-event-pipe';
 import type { Accommodation } from 'react-native-nitro-event-pipe';
+import Animated, { useSharedValue } from 'react-native-reanimated';
 
 export default function App() {
   const [accommodations, setAccommodations] = useState<Accommodation[] | null>(
@@ -14,6 +15,12 @@ export default function App() {
       setAccommodations(accomodationMap.results);
     });
   }, []);
+
+  const width = useSharedValue(100);
+  const handlePress = () => {
+    width.value = withSpring(width.value + 50);
+  };
+
   return (
     <View style={styles.container}>
       <Button
@@ -32,6 +39,12 @@ export default function App() {
       ))}
 
       <Button title="Refresh" onPress={() => NativePipe.refresh()} />
+
+      <View>
+	<Text>Animation test!</Text>
+	<Animated.View style={[styles.square, { width }]} />
+	<Button title="Press me" onPress={handlePress} />
+      </View>
     </View>
   );
 }
@@ -41,6 +54,11 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
+  },
+  square: {
+    width: 20,
+    height: 20,
+    backgroundColor: 'red'
   },
 });
 
