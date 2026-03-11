@@ -12,6 +12,17 @@ mkdir -p FrameworkOutputs
 # from accumulating across incremental builds.
 rm -f build/Build/Products/*/RNLib.framework/RNLib
 
+# Ensure .last_build_configuration exists so the CocoaPods script phase
+# (replace-rncore-version.js) correctly swaps the React-Core-prebuilt binary.
+# Without this file, the script assumes the default npm binary is Debug,
+# but it is actually Release — so Debug builds silently get a Release binary.
+# Seeding with "unknown" guarantees the script replaces on the first build
+# regardless of which configuration is requested.
+RNCORE_LAST_CFG="Pods/React-Core-prebuilt/.last_build_configuration"
+if [ ! -f "$RNCORE_LAST_CFG" ]; then
+  echo "unknown" > "$RNCORE_LAST_CFG"
+fi
+
 xcodebuild \
   -workspace ReactApp.xcworkspace \
   -scheme RNLib \
